@@ -24,6 +24,54 @@ function scene:create( event )
 
 	local sceneGroup = self.view
 
+
+	width = 160
+	height = 160
+
+	sky = display.newImageRect("bg/sky.png",1000, 500)
+	sky.x = display.contentCenterX
+	sky.y = display.contentCenterY/2
+
+	clouds = display.newImageRect("bg/cloud.png",1000, 500)
+	clouds.x = display.contentCenterX * 5
+	clouds.y = display.contentCenterY/2
+
+	ground = display.newImageRect("bg/bg1.png",500, 300)
+	ground.x = display.contentCenterX
+	ground.y = display.contentCenterY*2
+
+	hero = display.newImageRect("character/boy.png",width,height)
+
+	--Position that boi
+	hero.x = display.contentCenterX
+	hero.y = display.contentCenterY
+
+	hero.myName = "hero"
+	hero.kind = "character"
+	hero.isAlive = true
+	hero.health = 100
+	hero.shield = 100
+	hero.damage = 20
+	hero.experience = 0
+	
+
+	local function moveClouds()
+		if clouds.x < display.screenOriginX - 500 then
+			clouds.x = display.viewableContentWidth*3
+		end	
+		
+		transition.to(clouds, {time = 1000, x = clouds.x - 50})
+	end
+ 
+	local time = 1000 -- 1000 is 1 second
+	loops = 0 -- 0 means infinite
+
+	timer.performWithDelay(1000, moveClouds, 0)
+
+
+
+
+	--[[
 	-- We need physics started to add bodies, but we don't want the simulaton
 	-- running until the scene is on the screen.
 	physics.start()
@@ -61,7 +109,7 @@ function scene:create( event )
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
 	sceneGroup:insert( grass)
-	sceneGroup:insert( crate )
+	sceneGroup:insert( crate )]]--
 end
 
 

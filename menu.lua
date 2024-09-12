@@ -41,10 +41,8 @@ function scene:create( event )
 	-- e.g. add display objects to 'sceneGroup', add touch listeners, etc.
 
 	-- display a background image
-	
-	--[[
 
-	local background = display.newImageRect( "background.jpg", display.actualContentWidth, display.actualContentHeight )
+	local background = display.newImageRect( "bg/background.jpg", display.actualContentWidth, display.actualContentHeight )
 	background.anchorX = 0
 	background.anchorY = 0
 	background.x = 0 + display.screenOriginX 
@@ -59,8 +57,8 @@ function scene:create( event )
 	playBtn = widget.newButton{
 		label = "Play Now",
 		labelColor = { default={ 1.0 }, over={ 0.5 } },
-		defaultFile = "button.png",
-		overFile = "button-over.png",
+		defaultFile = "bg/button.png",
+		overFile = "bg/button-over.png",
 		width = 154, height = 40,
 		onRelease = onPlayBtnRelease	-- event listener function
 	}
@@ -71,51 +69,6 @@ function scene:create( event )
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
 	sceneGroup:insert( playBtn )
-
-	]]--
-
-	width = 160
-	height = 160
-
-	sky = display.newImageRect("bg/sky.png",1000, 500)
-	sky.x = display.contentCenterX
-	sky.y = display.contentCenterY/2
-
-	clouds = display.newImageRect("bg/cloud.png",1000, 500)
-	clouds.x = display.contentCenterX * 5
-	clouds.y = display.contentCenterY/2
-
-	ground = display.newImageRect("bg/bg1.png",500, 300)
-	ground.x = display.contentCenterX
-	ground.y = display.contentCenterY*2
-
-	hero = display.newImageRect("character/boy.png",width,height)
-
-	--Position that boi
-	hero.x = display.contentCenterX
-	hero.y = display.contentCenterY
-
-	hero.myName = "hero"
-	hero.kind = "character"
-	hero.isAlive = true
-	hero.health = 100
-	hero.shield = 100
-	hero.damage = 20
-	hero.experience = 0
-	
-
-	local function moveClouds()
-		if clouds.x < display.screenOriginX - 500 then
-			clouds.x = display.viewableContentWidth*3
-		end	
-		
-		transition.to(clouds, {time = 1000, x = clouds.x - 50})
-	end
- 
-	local time = 1000 -- 1000 is 1 second
-	loops = 0 -- 0 means infinite
-
-	timer.performWithDelay(1000, moveClouds, 0)
 
 end
 
